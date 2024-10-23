@@ -10,9 +10,9 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container text-center">
     <div class="row">
-      <div class="col">
+      <div class="col-md-4 offset-md-4">
         <h1 class="text-center">Login</h1>
         <div class="card">
           <div class="card-body">
