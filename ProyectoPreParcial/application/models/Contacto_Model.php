@@ -13,4 +13,11 @@ class Contacto_Model extends CI_Model
         $this->db->insert($this->tabla, $datos);
         return $this->db->insert_id();
     }
+
+    public function listar($usuario_id)
+    {
+        $this->db->where("usuario_id",$usuario_id);
+        $query = $this->db->get($this->tabla);
+        return $query->result_array();
+    }
 }
