@@ -12,11 +12,11 @@
 <body>
   <div class="container text-center">
     <div class="row">
-      <div class="col-md-4 offset-md-4">
+      <div class="col-md-6 offset-md-3">
         <h1 class="text-center">Login</h1>
         <div class="card">
           <div class="card-body">
-            <form action="<?=site_url("auth/acceder")?>" method="post">
+            <form action="<?= site_url("auth/acceder") ?>" method="post">
               <div class="mb-3">
                 <label class="form-label" for="usuario">Usuario</label>
                 <input class="form-control" type="text" id="usuario" name="usuario">
@@ -24,6 +24,9 @@
               <div class="mb-3">
                 <label class="form-label" for="contrasena">Contrasena</label>
                 <input class="form-control" type="password" id="contrasena" name="contrasena">
+              </div>
+              <div class="text-start">
+                <a href="#" class="icon-link icon-link-hover">Olvide mi Contraseña</a>
               </div>
               <button type="submit" class="btn btn-outline-primary">Acceder</button>
             </form>
