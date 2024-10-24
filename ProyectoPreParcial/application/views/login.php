@@ -14,16 +14,30 @@
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <h1 class="text-center">Login</h1>
+        <?php if($respuesta = $this->session->flashdata("auth")){
+          switch($respuesta)
+          {
+            case "acceso denegado": ?>
+            <div class="alert alert-danger">Acceso denegado,compruebe los datos ingresados</div>
+            <?php break;
+          }
+        } ?>
         <div class="card">
           <div class="card-body">
             <form action="<?= site_url("auth/acceder") ?>" method="post">
               <div class="mb-3">
                 <label class="form-label" for="usuario">Usuario</label>
-                <input class="form-control" type="text" id="usuario" name="usuario">
+                <input class="form-control <?=form_error("usuario")? "is-invalid" : ""?>" value="<?=set_value("usuario")?>" type="text" id="usuario" name="usuario">
+                <div class="invalid-feedback">
+                    Complete el campo con su nombre de usuario
+                </div>
               </div>
               <div class="mb-3">
-                <label class="form-label" for="contrasena">Contrasena</label>
-                <input class="form-control" type="password" id="contrasena" name="contrasena">
+                <label class="form-label" for="contrasena">Contraseña</label>
+                <input class="form-control <?=form_error("contrasena")? "is-invalid" : ""?>" value="<?=set_value("contrasena")?>" type="password" id="contrasena" name="contrasena">
+                <div class="invalid-feedback">
+                    Complete el campo con su contraseña
+                </div>
               </div>
               <div class="text-start">
                 <a href="#" class="icon-link icon-link-hover">Olvide mi Contraseña</a>

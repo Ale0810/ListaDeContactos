@@ -31,6 +31,7 @@ class Auth extends CI_Controller
 				$this->session->set_userdata("usuario", $usuario["usuario"]);
 				redirect("contactos");
 			} else {
+				$this->session->set_flashdata("auth","acceso denegado");
 				redirect("auth/acceder");
 			}
 		}
