@@ -25,15 +25,19 @@
                                         <th class="text-center">Nombre</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Telefono</th>
+                                        <th class="text-center">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($contactos as $c) { ?>
                                         <tr>
-                                            <td class="text-center"><?=$c["apellido"]?></td>
-                                            <td class="text-center"><?=$c["nombre"]?></td>
-                                            <td class="text-center"><?=$c["email"]?></td>
-                                            <td class="text-center"><?=$c["telefono"]?></td>
+                                            <td class="text-center"><?= $c["apellido"] ?></td>
+                                            <td class="text-center"><?= $c["nombre"] ?></td>
+                                            <td class="text-center"><?= $c["email"] ?></td>
+                                            <td class="text-center"><?= $c["telefono"] ?></td>
+                                            <td class="text-center"><a class="btn btn-outline-danger" href="<?=site_url("contactos/eliminar?contacto_id=".$c["contacto_id"])?>">
+                                                    <i class="bi bi-trash-fill"></i></a>
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

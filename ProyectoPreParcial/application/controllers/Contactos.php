@@ -31,7 +31,7 @@ class Contactos extends CI_Controller
             $datos["telefono"] = set_value("telefono");
             $datos["usuario_id"] = $this->session->userdata("usuario_id");
             if ($nuevo = $this->contacto_model->nuevo($datos)) {
-                $this->session->set_userdata("listacontactos",$nuevo);
+                $this->session->set_userdata("listacontactos", $nuevo);
                 $this->session->set_flashdata("respuesta", "Contacto agregado!!");
                 redirect("contactos/listar");
             } else {
@@ -46,5 +46,17 @@ class Contactos extends CI_Controller
         $usuario_id = $this->session->userdata("usuario_id");
         $contactos["contactos"] = $this->contacto_model->listar($usuario_id);
         $this->load->view("contactos/listar", $contactos);
+    }
+
+    public function eliminar()
+    {
+        $usuario_id = $this->session->userdata("usuario_id");
+        $contacto_id = $this->input->get("contacto_id");
+        if ($this->contacto_model->eliminar($usuario_id, $contacto_id)) {
+            $this->session->set_flashdata("respuesta", "Contacto eliminado correctamente!");
+        } else {
+            $this->session->set_flashdata("respuesta", "Surgio un error inesperado,intentelo nuevamente");
+        }
+        redirect("contactos/listar");
     }
 }

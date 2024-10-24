@@ -20,4 +20,11 @@ class Contacto_Model extends CI_Model
         $query = $this->db->get($this->tabla);
         return $query->result_array();
     }
+
+    public function eliminar($usuario_id,$contacto_id)
+    {
+        $this->db->where($this->contacto_id,$contacto_id);
+        $this->db->where("usuario_id",$usuario_id);
+        return $this->db->delete($this->tabla); 
+    }
 }
