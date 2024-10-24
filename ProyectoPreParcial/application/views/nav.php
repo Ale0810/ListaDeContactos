@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Contactos</a>
+        <a class="navbar-brand" href="<?=site_url("contactos/agregar")?>">Contactos</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,11 +22,10 @@
                         <li><a class="dropdown-item" href="<?= site_url("auth/salir") ?>">Cerrar Sesion</a></li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=site_url("contactos/listar")?>">Lista de Contactos</a>
+                </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                <button class="btn btn-dark btn-outline-light" type="submit">Buscar</button>
-            </form>
         </div>
     </div>
 </nav>

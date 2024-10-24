@@ -1,9 +1,12 @@
 <?php
-class Contactos extends CI_Controller{
+class Contactos extends CI_Controller
+{
     function __construct()
     {
         parent::__construct();
-        $this->load->model("contacto_model");
+        if ($this->session->userdata("usuario_id")) {
+            $this->load->model("contacto_model");
+        }
     }
 
     public function index()
@@ -13,6 +16,56 @@ class Contactos extends CI_Controller{
 
     public function agregar()
     {
-        $this->load->view("principal/contactos");
+        $this->load->library("form_validation");
+        $this->form_validation->set_rules("apellido", "apellido", "trim|strtolower|required");
+        $this->form_validation->set_rules("nombre", "nombre", "trim|strtolower|required");
+        $this->form_validation->set_rules("telefono", "telefono", "trim|strtolower|required");
+        $this->form_validation->set_rules("email", "email", "valid_email|required");
+        if ($this->form_validation->run() == false) {
+            $this->load->view("contactos/agregar");
+        } else {
+            $datos = [];
+            $datos["apellido"] = set_value("apellido");
+            $datos["nombre"] = set_value("nombre");
+            $datos["email"] = set_value("email");
+            $datos["telefono"] = set_value("telefono");
+            $datos["usuario_id"] = $this->session->userdata("usuario_id");
+            if ($nuevo = $this->contacto_model->nuevo($datos)) {
+                $this->session->set_userdata("listacontactos", $nuevo);
+                $this->session->set_flashdata("respuesta", "agregado");
+                redirect("contactos/listar");
+            } else {
+                $this->session->set_flashdata("respuesta", "no agregado");
+                redirect("contactos/agregar");
+            }
+        }
+    }
+
+    public function listar()
+    {
+        $usuario_id = $this->session->userdata("usuario_id");
+        $apellido_filtrado = $this->input->get("buscar");
+        $contactos = [];
+        if ($apellido_filtrado) {
+            $contactos["contactos"] = $this->contacto_model->buscar($apellido_filtrado);
+            if (empty($contactos["contactos"])) {
+                $this->session->set_flashdata("respuesta", "no encontrado");
+            }
+        } else {
+            $contactos["contactos"] = $this->contacto_model->listar($usuario_id);
+        }
+        $this->load->view("contactos/listar", $contactos);
+    }
+
+    public function eliminar()
+    {
+        $usuario_id = $this->session->userdata("usuario_id");
+        $contacto_id = $this->input->get("contacto_id");
+        if ($this->contacto_model->eliminar($usuario_id, $contacto_id)) {
+            $this->session->set_flashdata("respuesta", "eliminado");
+        } else {
+            $this->session->set_flashdata("respuesta", "no eliminado");
+        }
+        redirect("contactos/listar");
     }
 }

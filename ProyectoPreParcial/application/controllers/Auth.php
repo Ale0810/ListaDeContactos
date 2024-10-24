@@ -23,7 +23,6 @@ class Auth extends CI_Controller
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view("login");
 		} else {
-			$this->load->model("usuario_model");
 			$usuario = set_value("usuario");
 			$contrasena = set_value("contrasena");
 			if ($usuario_id = $this->usuario_model->check_login($usuario, $contrasena)) {
@@ -32,6 +31,7 @@ class Auth extends CI_Controller
 				$this->session->set_userdata("usuario", $usuario["usuario"]);
 				redirect("contactos");
 			} else {
+				$this->session->set_flashdata("auth","acceso denegado");
 				redirect("auth/acceder");
 			}
 		}
