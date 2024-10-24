@@ -40,7 +40,7 @@
                 </div>
               </div>
               <div class="text-start">
-                <a href="#" class="icon-link icon-link-hover">Olvide mi Contraseña</a>
+                <a href="<?=site_url("auth/cambiarcontraseña")?>" class="icon-link icon-link-hover">Olvide mi Contraseña</a>
               </div>
               <button type="submit" class="btn btn-outline-primary">Acceder</button>
             </form>

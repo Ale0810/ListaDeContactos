@@ -42,4 +42,9 @@ class Auth extends CI_Controller
 		$this->session->sess_destroy();
 		redirect("auth/acceder");
 	}
+
+	public function cambiarcontraseña()
+	{
+		$this->load->view("resetcontraseña");
+	}
 }
