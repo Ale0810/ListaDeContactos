@@ -27,4 +27,11 @@ class Contacto_Model extends CI_Model
         $this->db->where("usuario_id",$usuario_id);
         return $this->db->delete($this->tabla); 
     }
+
+    public function buscar($apellido)
+    {
+        $this->db->like("apellido",$apellido);
+        $query = $this->db->get($this->tabla);
+        return $query->result_array();
+    }
 }

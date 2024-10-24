@@ -15,6 +15,32 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h1 class="text-center">Lista de Contactos</h1>
+                <?php if ($respuesta = $this->session->flashdata("respuesta")) {
+                    switch ($respuesta) {
+                        case "agregado": ?>
+                            <div class="alert alert-success">Contacto agregado con exito!</div>
+                            <?php break;
+                        case "eliminado": ?>
+                            <div class="alert alert-info">Contacto eliminado correctamente!</div>
+                            <?php break;
+                        case "no eliminado" or "no agregado": ?>
+                            <div class="alert alert-danger">Ocurrio un error,intentelo nuevamente</div>
+                            <?php break;
+                        case "no encontrado": ?>
+                            <div class="alert alert-info">No se encontro ningun contacto con ese apellido</div>
+                            <?php break;
+                    }
+                    ?>
+                <?php } ?>
+                <form class="d-flex m-3" action="<?= site_url("contactos/listar") ?>" method="get" role="search">
+                    <div class="text-start me-3">
+                        <a class="btn btn-outline-secondary" href="<?= site_url("contactos/listar") ?>"><i
+                                class="bi bi-backspace-fill"></i></a>
+                    </div>
+                    <input class="form-control me-2" name="buscar" type="search" placeholder="Buscar"
+                        aria-label="Search">
+                    <button class="btn btn-outline-warning" type="submit"><i class="bi bi-search"></i></button>
+                </form>
                 <div class="card">
                     <div class="card-body">
                         <?php if (!empty($contactos)) { ?>
@@ -35,7 +61,8 @@
                                             <td class="text-center"><?= $c["nombre"] ?></td>
                                             <td class="text-center"><?= $c["email"] ?></td>
                                             <td class="text-center"><?= $c["telefono"] ?></td>
-                                            <td class="text-center"><a class="btn btn-outline-danger" href="<?=site_url("contactos/eliminar?contacto_id=".$c["contacto_id"])?>">
+                                            <td class="text-center"><a class="btn btn-outline-danger"
+                                                    href="<?= site_url("contactos/eliminar?contacto_id=" . $c["contacto_id"]) ?>">
                                                     <i class="bi bi-trash-fill"></i></a>
                                             </td>
                                         </tr>
@@ -43,7 +70,7 @@
                                 </tbody>
                             </table>
                         <?php } else { ?>
-                            <div class="alert alert-info">No hay contactos guardados</div>
+                            <div class="alert alert-primary">No hay contactos guardados</div>
                         <?php } ?>
                     </div>
                 </div>

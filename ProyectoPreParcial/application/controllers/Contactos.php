@@ -32,10 +32,10 @@ class Contactos extends CI_Controller
             $datos["usuario_id"] = $this->session->userdata("usuario_id");
             if ($nuevo = $this->contacto_model->nuevo($datos)) {
                 $this->session->set_userdata("listacontactos", $nuevo);
-                $this->session->set_flashdata("respuesta", "Contacto agregado!!");
+                $this->session->set_flashdata("respuesta", "agregado");
                 redirect("contactos/listar");
             } else {
-                $this->session->set_flashdata("respuesta", "Ocurrio un error vuelva a intentarlo");
+                $this->session->set_flashdata("respuesta", "no agregado");
                 redirect("contactos/agregar");
             }
         }
@@ -44,7 +44,16 @@ class Contactos extends CI_Controller
     public function listar()
     {
         $usuario_id = $this->session->userdata("usuario_id");
-        $contactos["contactos"] = $this->contacto_model->listar($usuario_id);
+        $apellido_filtrado = $this->input->get("buscar");
+        $contactos = [];
+        if ($apellido_filtrado) {
+            $contactos["contactos"] = $this->contacto_model->buscar($apellido_filtrado);
+            if (empty($contactos["contactos"])) {
+                $this->session->set_flashdata("respuesta", "no encontrado");
+            }
+        } else {
+            $contactos["contactos"] = $this->contacto_model->listar($usuario_id);
+        }
         $this->load->view("contactos/listar", $contactos);
     }
 
@@ -53,9 +62,9 @@ class Contactos extends CI_Controller
         $usuario_id = $this->session->userdata("usuario_id");
         $contacto_id = $this->input->get("contacto_id");
         if ($this->contacto_model->eliminar($usuario_id, $contacto_id)) {
-            $this->session->set_flashdata("respuesta", "Contacto eliminado correctamente!");
+            $this->session->set_flashdata("respuesta", "eliminado");
         } else {
-            $this->session->set_flashdata("respuesta", "Surgio un error inesperado,intentelo nuevamente");
+            $this->session->set_flashdata("respuesta", "no eliminado");
         }
         redirect("contactos/listar");
     }
