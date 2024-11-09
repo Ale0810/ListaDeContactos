@@ -10,17 +10,32 @@
 </head>
 
 <body>
+    <?php $this->load->view("nav") ?>
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center">Cambiar Contraseña</h1>
+                <?php if ($rsp = $this->session->flashdata("op")) {
+                    switch($rsp)
+                    {
+                        case "error": ?>
+                        <div class="alert alert-danger">Error al reestablecer contraseña</div>
+                        <?php break;
+                    }
+                } ?>
                 <div class="card">
                     <div class="card-body">
-                        <form action="<?= site_url("") ?>" method="post">
+                        <form action="<?= site_url("auth/cambiarpassword") ?>" method="post">
                             <div class="mb-3">
                                 <label class="form-label" for="nuevacontaseña">Nueva Contraseña</label>
-                                <input class="form-control" type="text" id="nuevacontraseña" name="nuevacontraseña">
+                                <input class="form-control" type="password" id="nuevacontraseña" name="nuevacontraseña">
                             </div>
-                            <button type="submit">Cambiar</button>
+                            <div class="mb-3">
+                                <label class="form-label" for="nuevacontaseña">Confirmar Contraseña</label>
+                                <input class="form-control" type="password" id="confirmarcontraseña"
+                                    name="confirmarcontraseña">
+                            </div>
+                            <button class="btn btn-outline-primary" type="submit">Cambiar</button>
                         </form>
                     </div>
                 </div>

@@ -20,6 +20,9 @@
             case "acceso denegado": ?>
             <div class="alert alert-danger">Acceso denegado,compruebe los datos ingresados</div>
             <?php break;
+            case "Contraseña reestablecida": ?>
+            <div class="alert alert-info">Contraseña reestablecida con exito</div>
+            <?php break;
           }
         } ?>
         <div class="card">
@@ -38,9 +41,6 @@
                 <div class="invalid-feedback">
                     Complete el campo con su contraseña
                 </div>
-              </div>
-              <div class="text-start">
-                <a href="<?=site_url("auth/cambiarcontraseña")?>" class="icon-link icon-link-hover">Olvide mi Contraseña</a>
               </div>
               <button type="submit" class="btn btn-outline-primary">Acceder</button>
             </form>

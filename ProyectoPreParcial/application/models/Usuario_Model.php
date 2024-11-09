@@ -30,4 +30,11 @@ class Usuario_Model extends CI_Model
             return false;
         }
     }
+
+    public function cambiarpassword($usuario_id, $contraseña)
+    {
+       $this->db->set("contrasena",md5($contraseña));
+       $this->db->where("usuario_id",$usuario_id);
+       return $this->db->update("usuarios");
+    }
 }

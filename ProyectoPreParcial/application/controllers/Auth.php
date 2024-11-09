@@ -31,7 +31,7 @@ class Auth extends CI_Controller
 				$this->session->set_userdata("usuario", $usuario["usuario"]);
 				redirect("contactos");
 			} else {
-				$this->session->set_flashdata("auth","acceso denegado");
+				$this->session->set_flashdata("auth", "acceso denegado");
 				redirect("auth/acceder");
 			}
 		}
@@ -43,8 +43,26 @@ class Auth extends CI_Controller
 		redirect("auth/acceder");
 	}
 
-	public function cambiarcontraseña()
+	public function cambiarpassword()
 	{
-		$this->load->view("resetcontraseña");
+		$this->load->library("form_validation");
+		$this->form_validation->set_rules("nuevacontraseña", "nuevacontraseña", "trim|required");
+		$this->form_validation->set_rules("confirmarcontraseña", "confirmarcontraseña", "trim|required|matches[nuevacontraseña]");
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view("resetcontraseña");
+		} else {
+			$nuevacontraseña = set_value("nuevacontraseña");
+			$confirmarcontraseña = set_value("confirmarcontraseña");
+			$usuario = $this->session->userdata("usuario_id");
+			if ($nuevacontraseña == $confirmarcontraseña) {
+				if ($this->usuario_model->cambiarpassword($usuario, $nuevacontraseña)) {
+					$this->session->set_flashdata("auth", "Contraseña reestablecida");
+					redirect("auth/acceder");
+				}
+			} else {
+				$this->session->set_flashdata("op", "error");
+				redirect("auth/cambiarpassword");
+			}
+		}
 	}
 }
