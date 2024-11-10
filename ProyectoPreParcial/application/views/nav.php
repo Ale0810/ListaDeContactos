@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<?=site_url("contactos/agregar")?>">Contactos</a>
+        <a class="navbar-brand" href="<?=site_url("contactos/listar")?>">Contactos</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=site_url("contactos/listar")?>">Lista de Contactos</a>
+                    <a class="nav-link" href="<?=site_url("contactos/agregar")?>">Agregar Contacto</a>
                 </li>
             </ul>
         </div>

@@ -11,7 +11,7 @@ class Contactos extends CI_Controller
 
     public function index()
     {
-        redirect("contactos/agregar");
+        redirect("contactos/listar");
     }
 
     public function agregar()
