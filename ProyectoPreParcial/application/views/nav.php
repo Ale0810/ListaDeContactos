@@ -15,7 +15,7 @@
                         <i class="bi bi-person-circle"> Usuario: <?php echo $this->session->userdata("usuario") ?></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Configuraciones</a></li>
+                        <li><a class="dropdown-item" href="<?=site_url("auth/cambiarpassword")?>">Configuraciones</a></li>
                         <li>
                             <hr class="dropdown-divider bg-light">
                         </li>
