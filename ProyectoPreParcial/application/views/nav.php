@@ -25,6 +25,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?=site_url("contactos/agregar")?>">Agregar Contacto</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=site_url("contactos/listar")?>">Lista de Contactos</a>
+                </li>
             </ul>
         </div>
     </div>
