@@ -16,11 +16,10 @@
             <div class="col-md-6 offset-md-3">
                 <h1 class="text-center">Cambiar Contraseña</h1>
                 <?php if ($rsp = $this->session->flashdata("op")) {
-                    switch($rsp)
-                    {
+                    switch ($rsp) {
                         case "error": ?>
-                        <div class="alert alert-danger">Error al reestablecer contraseña</div>
-                        <?php break;
+                            <div class="alert alert-danger">Error al reestablecer contraseña</div>
+                            <?php break;
                     }
                 } ?>
                 <div class="card">
@@ -28,12 +27,21 @@
                         <form action="<?= site_url("auth/cambiarpassword") ?>" method="post">
                             <div class="mb-3">
                                 <label class="form-label" for="nuevacontaseña">Nueva Contraseña</label>
-                                <input class="form-control" type="password" id="nuevacontraseña" name="nuevacontraseña">
+                                <input class="form-control <?= form_error("nuevacontraseña") ? "is-invalid" : "" ?>"
+                                    value="<?= set_value("nuevacontraseña") ?>" type="password" id="nuevacontraseña"
+                                    name="nuevacontraseña">
+                                <div class="invalid-feedback">
+                                    <?= form_error("nuevacontraseña") ?>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="nuevacontaseña">Confirmar Contraseña</label>
-                                <input class="form-control" type="password" id="confirmarcontraseña"
-                                    name="confirmarcontraseña">
+                                <input class="form-control <?= form_error("confirmarcontraseña") ? "is-invalid" : "" ?>"
+                                    value="<?= set_value("confirmarcontraseña") ?>" type="password"
+                                    id="confirmarcontraseña" name="confirmarcontraseña">
+                                <div class="invalid-feedback">
+                                    <?= form_error("confirmarcontraseña") ?>
+                                </div>
                             </div>
                             <button class="btn btn-outline-primary" type="submit">Cambiar</button>
                         </form>

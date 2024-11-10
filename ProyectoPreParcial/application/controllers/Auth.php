@@ -46,8 +46,23 @@ class Auth extends CI_Controller
 	public function cambiarpassword()
 	{
 		$this->load->library("form_validation");
-		$this->form_validation->set_rules("nuevacontraseña", "nuevacontraseña", "trim|required");
-		$this->form_validation->set_rules("confirmarcontraseña", "confirmarcontraseña", "trim|required|matches[nuevacontraseña]");
+		$this->form_validation->set_rules(
+			"nuevacontraseña",
+			"nuevacontraseña",
+			"trim|required",
+			[
+				"required" => "Este campo es obligatorio"
+			]
+		);
+		$this->form_validation->set_rules(
+			"confirmarcontraseña",
+			"confirmarcontraseña",
+			"trim|required|matches[nuevacontraseña]",
+			[
+				"required" => "Este campo es obligatorio",
+				"matches" => "Las contraseñas no coinciden"
+			]
+		);
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view("resetcontraseña");
 		} else {
